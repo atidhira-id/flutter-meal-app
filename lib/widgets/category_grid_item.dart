@@ -18,7 +18,17 @@ class CategoryGridItem extends StatelessWidget {
       splashColor: Theme.of(context).primaryColor,
       child: Stack(
         children: [
-          Container(padding: EdgeInsets.all(8), color: category.color),
+          Container(
+            padding: EdgeInsets.all(8),
+            decoration: category.imageUrl != null
+                ? BoxDecoration(
+                    image: DecorationImage(
+                      image: NetworkImage(category.imageUrl!),
+                      fit: BoxFit.cover,
+                    ),
+                  )
+                : BoxDecoration(color: category.color),
+          ),
           Positioned(
             bottom: 0,
             left: 0,
@@ -26,10 +36,14 @@ class CategoryGridItem extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(12.0),
               width: double.infinity,
-              color: Color.fromARGB(80, 0, 0, 0),
+              color: Color.fromARGB(180, 0, 0, 0),
               child: Text(
                 category.title,
-                style: TextStyle(fontWeight: FontWeight.bold, letterSpacing: 2),
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 2,
+                ),
               ),
             ),
           ),
