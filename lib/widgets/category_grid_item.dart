@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meal_app/models/category.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class CategoryGridItem extends StatelessWidget {
   const CategoryGridItem({
@@ -18,16 +19,11 @@ class CategoryGridItem extends StatelessWidget {
       splashColor: Theme.of(context).primaryColor,
       child: Stack(
         children: [
-          Container(
-            padding: EdgeInsets.all(8),
-            decoration: category.imageUrl != null
-                ? BoxDecoration(
-                    image: DecorationImage(
-                      image: NetworkImage(category.imageUrl!),
-                      fit: BoxFit.cover,
-                    ),
-                  )
-                : BoxDecoration(color: category.color),
+          FadeInImage(
+            width: double.infinity,
+            fit: BoxFit.cover,
+            placeholder: MemoryImage(kTransparentImage),
+            image: NetworkImage(category.imageUrl!),
           ),
           Positioned(
             bottom: 0,
@@ -36,7 +32,7 @@ class CategoryGridItem extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(12.0),
               width: double.infinity,
-              color: Color.fromARGB(180, 0, 0, 0),
+              color: const Color.fromARGB(180, 0, 0, 0),
               child: Text(
                 category.title,
                 style: TextStyle(
