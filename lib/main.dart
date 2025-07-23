@@ -11,7 +11,11 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(theme: theme, home: const CategoriesScreen());
+    return MaterialApp(
+      theme: theme,
+      debugShowCheckedModeBanner: false,
+      home: const CategoriesScreen(),
+    );
   }
 }
 
