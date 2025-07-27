@@ -3,6 +3,7 @@ import 'package:meal_app/models/meal.dart';
 import 'package:meal_app/utils/string_utils.dart';
 import 'package:meal_app/widgets/meal_trait.dart';
 import 'package:transparent_image/transparent_image.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class MealDetail extends StatelessWidget {
   const MealDetail({super.key, required this.meal});
@@ -15,7 +16,7 @@ class MealDetail extends StatelessWidget {
       appBar: AppBar(
         actionsPadding: EdgeInsets.symmetric(horizontal: 4),
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.favorite)),
+          IconButton(onPressed: () {}, icon: const Icon(Icons.favorite_border)),
         ],
       ),
       body: SingleChildScrollView(
@@ -28,33 +29,38 @@ class MealDetail extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    spacing: 8,
-                    children: [
-                      Text(
-                        meal.title,
-                        style: TextStyle(color: Colors.white, fontSize: 20),
-                      ),
-                      Row(
-                        spacing: 8,
-                        children: [
-                          MealTrait(
-                            text: '${meal.duration} min',
-                            icon: Icons.schedule,
-                          ),
-                          MealTrait(
-                            text: capitalizeWords(meal.complexity.name),
-                            icon: Icons.work,
-                          ),
-                          MealTrait(
-                            text: capitalizeWords(meal.affordability.name),
-                            icon: Icons.attach_money,
-                          ),
-                        ],
-                      ),
-                    ],
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      spacing: 8,
+                      children: [
+                        AutoSizeText(
+                          meal.title,
+                          maxLines: 1,
+                          minFontSize: 10,
+                          style: TextStyle(color: Colors.white, fontSize: 26),
+                        ),
+                        Row(
+                          spacing: 8,
+                          children: [
+                            MealTrait(
+                              text: '${meal.duration} min',
+                              icon: Icons.schedule,
+                            ),
+                            MealTrait(
+                              text: capitalizeWords(meal.complexity.name),
+                              icon: Icons.work,
+                            ),
+                            MealTrait(
+                              text: capitalizeWords(meal.affordability.name),
+                              icon: Icons.attach_money,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
+                  SizedBox(width: 4),
                   Container(
                     padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                     decoration: BoxDecoration(
