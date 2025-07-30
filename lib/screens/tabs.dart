@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:meal_app/screens/categories.dart';
+import 'package:meal_app/screens/filters.dart';
 import 'package:meal_app/screens/meals_screen.dart';
+import 'package:meal_app/widgets/main_drawer.dart';
 
 class TabsScreen extends StatefulWidget {
   const TabsScreen({super.key});
@@ -20,6 +22,18 @@ class _TabsState extends State<TabsScreen> {
     });
   }
 
+  void _setScreen(String indentifier) {
+    // Close the side drawer
+    Navigator.of(context).pop();
+
+    if (indentifier == 'filters') {
+      // Push filter screen on top of stack
+      Navigator.of(
+        context,
+      ).push(MaterialPageRoute(builder: (ctx) => const FiltersScreen()));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     Widget activePage = const CategoriesScreen();
@@ -31,6 +45,7 @@ class _TabsState extends State<TabsScreen> {
     }
     return Scaffold(
       appBar: AppBar(title: Text(activeTitle)),
+      drawer: MainDrawer(onSelectMenu: _setScreen),
       body: activePage,
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedPageIndex,
