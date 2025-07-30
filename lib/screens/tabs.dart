@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:meal_app/screens/categories.dart';
 import 'package:meal_app/screens/filters.dart';
@@ -22,15 +24,17 @@ class _TabsState extends State<TabsScreen> {
     });
   }
 
-  void _setScreen(String indentifier) {
+  void _setScreen(String indentifier) async {
     // Close the side drawer
     Navigator.of(context).pop();
 
     if (indentifier == 'filters') {
       // Push filter screen on top of stack
-      Navigator.of(
-        context,
-      ).push(MaterialPageRoute(builder: (ctx) => const FiltersScreen()));
+      final filterResult = await Navigator.of(context).push<Map<Filter, bool>>(
+        MaterialPageRoute(builder: (ctx) => const FiltersScreen()),
+      );
+
+      log(filterResult.toString());
     }
   }
 
