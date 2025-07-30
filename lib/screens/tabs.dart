@@ -40,7 +40,9 @@ class _TabsState extends State<TabsScreen> {
     if (indentifier == 'filters') {
       // Push filter screen on top of stack
       final filterResult = await Navigator.of(context).push<Map<Filter, bool>>(
-        MaterialPageRoute(builder: (ctx) => const FiltersScreen()),
+        MaterialPageRoute(
+          builder: (ctx) => FiltersScreen(filterState: _selectedFilter),
+        ),
       );
 
       log(filterResult.toString());
