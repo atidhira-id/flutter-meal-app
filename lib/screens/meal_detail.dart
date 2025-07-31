@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:meal_app/models/meal.dart';
 import 'package:meal_app/utils/string_utils.dart';
+import 'package:meal_app/widgets/meal_favorite_button.dart';
 import 'package:meal_app/widgets/meal_trait.dart';
 import 'package:transparent_image/transparent_image.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -15,9 +16,7 @@ class MealDetail extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         actionsPadding: EdgeInsets.symmetric(horizontal: 4),
-        actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.favorite_border)),
-        ],
+        actions: [MealFavoriteButton(meal: meal)],
       ),
       body: SingleChildScrollView(
         child: Column(
